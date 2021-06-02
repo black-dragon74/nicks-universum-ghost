@@ -76,7 +76,7 @@ const Header: ClientFC<HeaderProps> = ({}) => {
               mobile ? "justify-center" : "justify-end"
             }`}
           >
-            Footer
+            CTAs
           </div>
         </nav>
       </header>

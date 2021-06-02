@@ -1,9 +1,11 @@
+/* eslint-disable global-require */
 module.exports = {
   purge: {
     content: [
       "./components/**/*.tsx",
       "./public/index.html",
       "./pages/**/*.tsx",
+      "./pages/*.tsx",
     ],
   },
   darkMode: false,
@@ -68,5 +70,6 @@ module.exports = {
   plugins: [
     require("@tailwindcss/line-clamp"),
     require("@tailwindcss/aspect-ratio"),
+    require("@tailwindcss/typography"),
   ],
 }
