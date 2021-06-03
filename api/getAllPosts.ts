@@ -7,6 +7,6 @@ export async function getAllPosts() {
       limit: "all",
     })
     .catch(err => {
-      console.error(err)
+      throw new Error(err)
     })
 }

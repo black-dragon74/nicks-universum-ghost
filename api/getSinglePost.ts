@@ -6,7 +6,7 @@ const getSinglePost = async (slug: string) => {
       slug,
     })
     .catch(err => {
-      console.error(err)
+      throw new Error(err)
     })
 }
 
