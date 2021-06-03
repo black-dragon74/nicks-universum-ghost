@@ -1,10 +1,12 @@
 import { FC } from "react"
 import { GetStaticProps } from "next"
 import dynamic from "next/dynamic"
-import { getAllPosts } from "../api"
+import { getPostsForPage } from "../api"
 import Footer from "../components/Footer/Footer"
 import PostCard from "../components/PostCard/PostCard"
 import { GhostPost } from "../types/Posts"
+import Pagination from "../components/Pagination/Pagination"
+import { PaginationType } from "../types/PaginationType"
 
 const isEven = (n: number) => n % 2 === 0
 const Header = dynamic(() => import("../components/Header/Header"), {
@@ -15,9 +17,10 @@ const Header = dynamic(() => import("../components/Header/Header"), {
 
 interface HomeProps {
   posts: GhostPost[]
+  pagination: PaginationType
 }
 
-const Home: FC<HomeProps> = ({ posts }) => {
+const Home: FC<HomeProps> = ({ posts, pagination }) => {
   return (
     <div className="px-4 pb-4 container mx-auto" style={{ maxWidth: "1200px" }}>
       <Header />
@@ -31,9 +34,11 @@ const Home: FC<HomeProps> = ({ posts }) => {
             title={post.title}
             excerpt={post.custom_excerpt || post.excerpt}
             imgURL={post.feature_image}
-            readMoreLink={post.url}
+            readMoreLink={post.slug}
+            readTime={post.reading_time + ""}
           />
         ))}
+        <Pagination paginationData={pagination} />
       </main>
       <footer>
         <Footer />
@@ -43,7 +48,7 @@ const Home: FC<HomeProps> = ({ posts }) => {
 }
 
 export const getStaticProps: GetStaticProps = async context => {
-  const posts = await getAllPosts()
+  const posts = await getPostsForPage(1)
   if (!posts) {
     return {
       notFound: true,
@@ -53,6 +58,7 @@ export const getStaticProps: GetStaticProps = async context => {
   return {
     props: {
       posts,
+      pagination: posts.meta.pagination,
     },
     revalidate: 10,
   }

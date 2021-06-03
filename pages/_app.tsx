@@ -1,4 +1,5 @@
 import "../styles/globals.scss"
+import "../styles/GlobalClasses.scss"
 import { Context as ResponsiveContext } from "react-responsive"
 import { useEffect, useState } from "react"
 import isServer from "../lib/isServer"

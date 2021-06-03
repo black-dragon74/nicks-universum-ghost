@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { ScreenType, useScreenType } from "../../hooks/useScreenType"
 import BurgerMenu from "../../ui/BurgerMenu"
 import { ClientFC } from "../../types/ClientFC"
@@ -11,7 +11,6 @@ const Header: ClientFC<HeaderProps> = ({}) => {
   const desktop = screenType < ScreenType.FullScreen
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const headerHeight = useRef<number>(0)
 
   const headerClassMobile =
     mobile && mobileMenuOpen
@@ -19,19 +18,10 @@ const Header: ClientFC<HeaderProps> = ({}) => {
       : ""
   const navClass = mobile ? "" : "mx-auto"
 
-  useLayoutEffect(() => {
-    const el = document.querySelector("#navBar")
-    if (!el) return
-    headerHeight.current = el.getBoundingClientRect().height
-  })
-
   return (
     <>
       {mobile && mobileMenuOpen ? (
-        <div
-          style={{ height: headerHeight.current + 28 }}
-          className="w-full opacity-0"
-        >
+        <div style={{ height: 61 }} className="w-full opacity-0">
           FACADE
         </div>
       ) : null}
