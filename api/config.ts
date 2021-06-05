@@ -1,8 +1,9 @@
 import GhostContentAPI from "@tryghost/content-api"
+import ProcessedENV from "@lib/processEnv"
 
 const GhostAPI = new GhostContentAPI({
-  url: process.env.API_URL,
-  key: process.env.API_KEY,
+  url: ProcessedENV.ghost.apiURL,
+  key: ProcessedENV.ghost.apiKey,
   version: "v3",
 })
 

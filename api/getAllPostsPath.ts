@@ -1,4 +1,4 @@
-import { getAllPosts } from "."
+import { getAllPosts } from "@api"
 
 const getAllPostsPath = async () => {
   const posts = await getAllPosts()

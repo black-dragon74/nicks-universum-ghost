@@ -4,7 +4,7 @@ import dynamic from "next/dynamic"
 import { getPostsForPage } from "../api"
 import Footer from "../components/Footer/Footer"
 import PostCard from "../components/PostCard/PostCard"
-import { GhostPost } from "../types/Posts"
+import { GhostPostOrPage } from "../types/GhostPostOrPage"
 import Pagination from "../components/Pagination/Pagination"
 import { PaginationType } from "../types/PaginationType"
 
@@ -16,7 +16,7 @@ const Header = dynamic(() => import("../components/Header/Header"), {
 })
 
 interface HomeProps {
-  posts: GhostPost[]
+  posts: GhostPostOrPage[]
   pagination: PaginationType
 }
 

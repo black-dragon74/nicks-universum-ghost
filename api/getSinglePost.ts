@@ -1,4 +1,4 @@
-import GhostAPI from "."
+import GhostAPI from "@api"
 
 const getSinglePost = async (slug: string) => {
   return await GhostAPI.posts

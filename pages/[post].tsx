@@ -1,13 +1,16 @@
 import { FC } from "react"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { useRouter } from "next/router"
-import { getSinglePost } from "../api"
-import { GhostPost } from "../types/Posts"
-import { getAllPostsPath } from "../api/getAllPostsPath"
+import { getSinglePost, getAllPostsPath } from "@api"
+import { GhostPostOrPage } from "../types/GhostPostOrPage"
 import HTMLRenderer from "../components/HTMLRenderer/HTMLRenderer"
+import Header from "../components/Header/Header"
+import Footer from "../components/Footer/Footer"
+import { normalizePost } from "@lib/ghost"
+import { parse as urlParse } from "url"
 
 interface PostPageProps {
-  post: GhostPost
+  post: GhostPostOrPage
 }
 
 const PostPage: FC<PostPageProps> = ({ post }) => {
@@ -18,9 +21,15 @@ const PostPage: FC<PostPageProps> = ({ post }) => {
   }
 
   return (
-    <div className="text-primary-100 text-3xl">
-      <HTMLRenderer html={post.html} />
-    </div>
+    <>
+      <Header />
+      <div className="inner">
+        <div className="prose prose-xl prose-pink text-white max-w-none">
+          <HTMLRenderer node={post.htmlAst} />
+        </div>
+      </div>
+      <Footer />
+    </>
   )
 }
 
@@ -35,13 +44,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   }
 
-  const post = await getSinglePost(slug)
+  let post = await getSinglePost(slug)
 
   if (!post) {
     return {
       notFound: true,
     }
   }
+
+  post = await normalizePost(post, urlParse("http://localhost:2368"))
 
   return {
     props: {

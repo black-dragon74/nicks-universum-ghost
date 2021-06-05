@@ -1,32 +1,36 @@
+/* eslint-disable react/display-name */
 import React, { FC } from "react"
-import rehypeReact from "rehype-react"
-import Rehype from "rehype"
+import rehypeReact, {
+  ComponentProps,
+  ComponentPropsWithNode,
+} from "rehype-react"
 import unified from "unified"
+import { Node } from "unist"
+import NextLink from "@components/NextLink/NextLink"
+import NextImage from "@components/NextImage/NextImage"
 
 interface HTMLRendererProps {
-  html: string
+  node?: Node
 }
 
 const options = {
   createElement: React.createElement,
   Fragment: React.Fragment,
   passNode: true,
+  components: {
+    Link: (props: ComponentProps) => (
+      <NextLink {...(props as ComponentPropsWithNode)} />
+    ),
+    Image: (props: ComponentProps) => (
+      <NextImage {...(props as ComponentPropsWithNode)} />
+    ),
+  },
 }
 
-// eslint-disable-next-line
-const rehype = Rehype().use({
-  settings: {
-    fragment: true,
-    space: `html`,
-    emitParseErrors: false,
-    verbose: false,
-  },
-})
 const renderer = unified().use(rehypeReact, options)
 
-const HTMLRenderer: FC<HTMLRendererProps> = ({ html }) => {
-  const htmlAsNode = rehype.parse(html || "")
-  return <>{renderer.stringify(htmlAsNode)}</>
+const HTMLRenderer: FC<HTMLRendererProps> = ({ node }) => {
+  return <>{renderer.stringify(node)}</>
 }
 
 export default HTMLRenderer

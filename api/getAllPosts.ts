@@ -1,4 +1,4 @@
-import GhostAPI from "."
+import GhostAPI from "@api"
 
 export async function getAllPosts() {
   return await GhostAPI.posts

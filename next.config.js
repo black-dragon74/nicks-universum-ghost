@@ -9,7 +9,7 @@ module.exports = {
     ]
   },
   images: {
-    domains: ["static.ghost.org"],
+    domains: ["static.ghost.org", "opensubscriptionplatforms.com"],
   },
   reactStrictMode: true,
   future: {

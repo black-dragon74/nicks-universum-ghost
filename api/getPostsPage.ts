@@ -1,5 +1,5 @@
-import { POSTS_PER_PAGE } from "../lib/constants"
-import { GhostAPI } from "./config"
+import { POSTS_PER_PAGE } from "@lib/constants"
+import GhostAPI from "@api"
 
 const getPostsForPage = async (pageNumber: number) => {
   return await GhostAPI.posts.browse({

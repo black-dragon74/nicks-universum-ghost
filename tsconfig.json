@@ -19,8 +19,17 @@
         "name": "typescript-plugin-css-modules",
         "customMatcher": "*\\.module\\.(c|sa|sc)ss$"
       }
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@api": ["api"],
+      "@appConfig": ["appConfig"],
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@lib/*": ["lib/*"],
+      "@styles/*": ["styles/*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/cache.js"],
   "exclude": ["node_modules"]
 }
