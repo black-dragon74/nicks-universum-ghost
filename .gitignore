@@ -39,3 +39,6 @@ yarn-error.log*
 
 #ENVs
 .env*
+
+#Cache
+.next-cache
