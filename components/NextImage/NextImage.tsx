@@ -1,30 +1,25 @@
 import Image from "next/image"
+import { Dimensions } from "@lib/images"
 import { ComponentPropsWithNode } from "rehype-react"
 
 interface NextImageProps {
   src: string
-  className?: string
-  alt?: string
-  width?: string
-  height?: string
+  className?: string[]
 }
 
 const NextImage = (props: ComponentPropsWithNode) => {
   const { node } = props
-  const { src, className, alt, width, height } =
-    node?.properties as NextImageProps
-  const wrapperClass = "relative flex " + className + " " || ""
+  if (!node) return null
+
+  const imageDimensions = node.imageDimensions as Dimensions
+  const { src, className: classArray } = node.properties as NextImageProps
+  const className = classArray.join(" ")
 
   return (
-    <div className={wrapperClass}>
-      <Image
-        alt={alt || ""}
-        src={src}
-        className={height && width ? "absolute" : ""}
-        width={width}
-        height={height}
-        objectFit="cover"
-      />
+    <div className="flex root-image">
+      <div {...{ className }}>
+        <Image src={src} {...imageDimensions} {...{ className }} />
+      </div>
     </div>
   )
 }

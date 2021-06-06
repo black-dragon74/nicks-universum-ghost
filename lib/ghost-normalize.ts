@@ -178,6 +178,10 @@ const withInlinedImages = async (htmlAst: Node): Promise<Node> => {
     const aspectRatio = width / height
     const flex = `flex: ${aspectRatio} 1 0` // Grow / Shrink / Basis
 
+    if (typeof parent.properties === "undefined") {
+      parent.properties = { style: "" }
+    }
+
     if (parent) {
       let parentStyle = (parent.properties as NodeProperties).style || []
       if (typeof parentStyle === "string") {

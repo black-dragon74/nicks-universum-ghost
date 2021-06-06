@@ -8,6 +8,7 @@ import Header from "../components/Header/Header"
 import Footer from "../components/Footer/Footer"
 import { normalizePost } from "@lib/ghost-normalize"
 import { parse as urlParse } from "url"
+import { generateTableOfContents } from "@lib/tableOfContents"
 
 interface PostPageProps {
   post: GhostPostOrPage
@@ -53,6 +54,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   post = await normalizePost(post, urlParse("http://localhost:2368"))
+  const toc = generateTableOfContents((post as GhostPostOrPage).htmlAst)
+  console.log(toc)
 
   return {
     props: {
