@@ -6,7 +6,7 @@ import { GhostPostOrPage } from "../types/GhostPostOrPage"
 import HTMLRenderer from "../components/HTMLRenderer/HTMLRenderer"
 import Header from "../components/Header/Header"
 import Footer from "../components/Footer/Footer"
-import { normalizePost } from "@lib/ghost"
+import { normalizePost } from "@lib/ghost-normalize"
 import { parse as urlParse } from "url"
 
 interface PostPageProps {
