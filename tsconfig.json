@@ -25,6 +25,7 @@
       "@api": ["api"],
       "@appConfig": ["appConfig"],
       "@components/*": ["components/*"],
+      "@meta/*": ["components/Meta/*"],
       "@hooks/*": ["hooks/*"],
       "@lib/*": ["lib/*"],
       "@styles/*": ["styles/*"]

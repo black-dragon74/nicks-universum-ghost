@@ -1,11 +1,21 @@
 import GhostAPI from "@api"
+import { GhostPostsOrPages } from "@lib/ghost"
+import { PostAndPageFetchOptions } from "./config"
+import {
+  createNextFeatureImages,
+  createNextProfileImagesFromPosts,
+} from "./helpers"
 
-export async function getAllPosts() {
-  return await GhostAPI.posts
-    .browse({
-      include: "tags",
-    })
-    .catch(err => {
-      throw new Error(err)
-    })
+const getAllPosts = async (props?: {
+  limit: number
+}): Promise<GhostPostsOrPages> => {
+  const posts = await GhostAPI.posts.browse({
+    ...PostAndPageFetchOptions,
+    ...(props && { ...props }),
+  })
+
+  const results = await createNextProfileImagesFromPosts(posts)
+  return await createNextFeatureImages(results)
 }
+
+export { getAllPosts }
