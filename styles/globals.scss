@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+// Global Vars
 :root {
   font-size: 14px;
 
@@ -22,8 +23,11 @@
   --color-accent-disabled: #f5bfbf;
   --screen-height-reduction: 0px;
   --color-primary-100-translucent: rgba(222, 227, 234, 0.15);
+
+  --inner-max-width: 1040px;
 }
 
+// Basic settings
 html,
 body,
 #__next {
@@ -31,3 +35,63 @@ body,
   height: 100%;
   width: 100%;
 }
+
+// Global Classes
+.inner {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--inner-max-width);
+}
+
+/**
+* Syntax highlighter shiz
+*/
+.token.attr-name {
+  color: rgb(173, 219, 103);
+  font-style: italic;
+}
+.token.comment {
+  color: rgb(128, 147, 147);
+}
+.token.string,
+.token.url {
+  color: rgb(173, 219, 103);
+}
+.token.variable {
+  color: rgb(214, 222, 235);
+}
+.token.number {
+  color: rgb(247, 140, 108);
+}
+.token.builtin,
+.token.char,
+.token.constant,
+.token.function {
+  color: rgb(130, 170, 255);
+}
+.token.punctuation {
+  color: rgb(199, 146, 234);
+}
+.token.selector,
+.token.doctype {
+  color: rgb(199, 146, 234);
+  font-style: "italic";
+}
+.token.class-name {
+  color: rgb(255, 203, 139);
+}
+.token.tag,
+.token.operator,
+.token.keyword {
+  color: #ffa7c4;
+}
+.token.boolean {
+  color: rgb(255, 88, 116);
+}
+.token.property {
+  color: rgb(128, 203, 196);
+}
+.token.namespace {
+  color: rgb(178, 204, 214);
+}
+/* End Syntax Highlighting */
