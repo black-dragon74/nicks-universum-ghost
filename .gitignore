@@ -42,3 +42,6 @@ yarn-error.log*
 
 #Cache
 .next-cache
+
+# Temp Files
+pages/test.tsx
