@@ -1,20 +1,19 @@
 import { useMediaQuery } from "react-responsive"
 
 export enum ScreenType {
-  ThreeCol = 1,
-  TwoCol,
-  OneCol,
-  FullScreen,
+  Desktop = 1,
+  Tablet,
+  Mobile,
 }
 
+// In css width breakpoints are mostly multiples of 256px
+
 export const useScreenType = () => {
-  const is3Cols = useMediaQuery({ minWidth: 1336 })
-  const is2Cols = useMediaQuery({ minWidth: 1265 })
-  const is1Cols = useMediaQuery({ minWidth: 800 })
+  const isDesktop = useMediaQuery({ minWidth: 1024 }) // 1024px or above is Desktop
+  const isTablet = useMediaQuery({ minWidth: 768 }) // 768px < width < 1024px is Tablet
 
-  if (is3Cols) return ScreenType.ThreeCol // lg
-  if (is2Cols) return ScreenType.TwoCol // md
-  if (is1Cols) return ScreenType.OneCol // sm
+  if (isDesktop) return ScreenType.Desktop // lg
+  if (isTablet) return ScreenType.Tablet // md
 
-  return ScreenType.FullScreen // xs
+  return ScreenType.Mobile // sm, xs  // Less than 768px is mobile
 }

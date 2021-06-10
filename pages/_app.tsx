@@ -19,7 +19,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   // This is so we don't have to use "next/dynamic" at page level
   if (isServer && (Component as ClientFC<unknown>).clientOnly) {
-    console.log("Skipped clientonly compoment rendering on server")
+    console.log(
+      `Skipped clientonly compoment ${
+        Component?.displayName || "Unnamed"
+      }'s rendering on server`
+    )
     return null
   }
 

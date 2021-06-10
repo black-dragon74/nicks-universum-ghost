@@ -10,6 +10,7 @@ const useActiveHash = (
     const observer = new IntersectionObserver(
       elems => {
         elems.forEach(elem => {
+          console.log(elem.target.innerHTML)
           if (elem.isIntersecting) {
             setActiveElement(elem.target.id)
           }

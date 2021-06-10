@@ -32,8 +32,12 @@ class ActiveOnHover extends Component<ActiveOnHoverProps> {
   }
 
   componentDidMount() {
-    this.elementRef?.current?.addEventListener("mouseover", this.onHoverEnter)
-    this.elementRef?.current?.addEventListener("mouseout", this.onHoverOut)
+    this.elementRef?.current?.addEventListener("mouseover", this.onHoverEnter, {
+      passive: true,
+    })
+    this.elementRef?.current?.addEventListener("mouseout", this.onHoverOut, {
+      passive: true,
+    })
   }
 
   componentWillUnmount() {

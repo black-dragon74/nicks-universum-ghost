@@ -24,6 +24,7 @@
     "paths": {
       "@api": ["api"],
       "@appConfig": ["appConfig"],
+      "@layout": ["components/Layout"],
       "@components/*": ["components/*"],
       "@meta/*": ["components/Meta/*"],
       "@hooks/*": ["hooks/*"],
