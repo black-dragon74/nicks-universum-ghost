@@ -30,7 +30,7 @@ const MainGrid: FC<MainGridProps> = ({ className = "", children }) => {
       className={`grid ${className}`}
       style={{
         gridTemplateColumns: gridStyle,
-        columnGap: "1rem",
+        columnGap: colGap,
       }}
     >
       {children}
