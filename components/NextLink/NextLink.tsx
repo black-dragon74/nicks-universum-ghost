@@ -17,12 +17,8 @@ const NextLink = (props: ComponentPropsWithNode) => {
     <>
       {!!href && (
         <Link href={href}>
-          <a aria-label="Test test">
-            {child.type === "text" ? (
-              <span>{child?.value}</span>
-            ) : (
-              <HTMLRenderer node={child} />
-            )}
+          <a>
+            <HTMLRenderer node={child} />
           </a>
         </Link>
       )}
