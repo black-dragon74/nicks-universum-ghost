@@ -28,6 +28,7 @@ const getImageDimensions = async (
   skipCache?: boolean
 ): Promise<Dimensions | null> => {
   if (skipCache) return null
+  if (!url) return null
 
   const cacheKey = await getCacheKey(url, skipCache)
   const alreadyCached = getCache<Dimensions>(url)
