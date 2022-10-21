@@ -1,16 +1,13 @@
 /* eslint-disable react/display-name */
 import React, { FC } from "react"
-import rehypeReact, {
-  ComponentProps,
-  ComponentPropsWithNode,
-} from "rehype-react"
-import unified from "unified"
-import { Node } from "unist"
+import rehypeReact from "rehype-react"
+import { unified } from "unified"
+import { Root } from "hast"
 import NextLink from "@components/NextLink/NextLink"
 import NextImage from "@components/NextImage/NextImage"
 
 interface HTMLRendererProps {
-  node?: Node
+  node?: Root
 }
 
 const options = {
@@ -18,12 +15,12 @@ const options = {
   Fragment: React.Fragment,
   passNode: true,
   components: {
-    Link: (props: ComponentProps) => (
-      <NextLink {...(props as ComponentPropsWithNode)} />
-    ),
-    Image: (props: ComponentProps) => (
-      <NextImage {...(props as ComponentPropsWithNode)} />
-    ),
+    img: ({ node }: any) => {
+      return <NextImage {...node} />
+    },
+    a: ({ node }: any) => {
+      return <NextLink {...node} />
+    },
   },
 }
 

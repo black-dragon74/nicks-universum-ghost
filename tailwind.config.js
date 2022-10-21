@@ -1,14 +1,13 @@
 /* eslint-disable global-require */
 module.exports = {
-  purge: {
-    content: [
-      "./components/**/*.tsx",
-      "./public/index.html",
-      "./pages/**/*.tsx",
-      "./pages/*.tsx",
-    ],
-  },
-  darkMode: false,
+  content: [
+    "./components/**/*.tsx",
+    "./public/index.html",
+    "./pages/**/*.tsx",
+    "./pages/*.tsx",
+    "./ui/*.tsx",
+  ],
+  darkMode: "media",
   theme: {
     fontFamily: {
       sans: [

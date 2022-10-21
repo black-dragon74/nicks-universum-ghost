@@ -1,11 +1,10 @@
-import GhostContentAPI from "@tryghost/content-api"
+import GhostContentAPI, { Params } from "@tryghost/content-api"
 import ProcessedENV from "@lib/processEnv"
-import { Params } from "next/dist/next-server/server/router"
 
 const GhostAPI = new GhostContentAPI({
   url: ProcessedENV.ghost.apiURL,
   key: ProcessedENV.ghost.apiKey,
-  version: "v3",
+  version: "v5.0",
 })
 
 const PostAndPageFetchOptions: Params = {

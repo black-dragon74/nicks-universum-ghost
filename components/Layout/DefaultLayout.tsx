@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react"
+import React, { FC, ReactNode } from "react"
 import { MainLayout } from "./MainLayout"
 
 interface DefaultLayoutProps {
@@ -7,7 +7,7 @@ interface DefaultLayoutProps {
   mobileHeader?: ReactNode
 }
 
-const DefaultLayout: FC<DefaultLayoutProps> = ({
+const DefaultLayout: FC<React.PropsWithChildren<DefaultLayoutProps>> = ({
   leftPanel,
   rightPanel,
   mobileHeader,

@@ -5,9 +5,12 @@ import HTMLRenderer from "@components/HTMLRenderer/HTMLRenderer"
 
 export default function ViewMyPage({ post }) {
   return (
-    <article className="prose prose-slate">
-      <HTMLRenderer node={(post as GhostPostOrPage).htmlAst} />
-    </article>
+    <div className="" style={{ maxWidth: "80%", margin: "0 auto" }}>
+      <article className="prose prose-invert prose-xl">
+        {/* <p>Dummy dumm dumm</p> */}
+        <HTMLRenderer node={(post as GhostPostOrPage).htmlAst} />
+      </article>
+    </div>
   )
 }
 
