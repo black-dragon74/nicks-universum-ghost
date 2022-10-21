@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { Node } from "unist"
-import visit from "unist-util-visit"
+import { Element } from "hast"
+import { visit } from "unist-util-visit"
 
 interface NodeProperties {
   id?: string
@@ -20,17 +20,18 @@ export interface ToC {
   items: ToCItem[] | []
 }
 
-const generateTableOfContents = (htmlAst: Node): ToCItem[] => {
+const generateTableOfContents = (htmlAst: Element): ToCItem[] => {
   // Heading tags
   const headingTags = ["h1", "h2", "h3", "h4", "h5", "h6"]
 
   // Accepts any arbitrary input, tries to narrow it down to `Node` and compare
-  const headings = (node: unknown): node is Node => {
-    return headingTags.includes((node as Node).tagName as string)
+  const headings = (node: unknown): node is Element => {
+    return headingTags.includes((node as Element).tagName as string)
   }
 
   // Visit all children (headingTags) recursively and return text contained in them
-  const walk = (children: Node[], text = "", depth = 0) => {
+  // TODO: add proper type notations
+  const walk = (children, text = "", depth = 0) => {
     children.forEach(child => {
       if (child.type === "text") {
         text += child.value
@@ -43,8 +44,8 @@ const generateTableOfContents = (htmlAst: Node): ToCItem[] => {
   }
 
   const toc: ToC[] = []
-  visit(htmlAst, headings, (node: Node) => {
-    const text = walk(node.children as Node[])
+  visit(htmlAst, headings, (node: Element) => {
+    const text = walk(node.children as Element[])
     if (text.length > 0) {
       const id = (node.properties as NodeProperties).id || "error-missing-id"
       const level = (node.tagName as string).substr(1, 1) // returns 1 for h1, 2 for h2...

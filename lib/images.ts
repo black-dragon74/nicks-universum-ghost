@@ -119,7 +119,7 @@ const normalizedImageURL = async (url: string) => {
           `Unexpected response [${response.statusText}] while streaming ${url}`
         )
       }
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
       // @ts-ignore
       await streamPipeline(response.body, createWriteStream(filePath))
     }

@@ -1,24 +1,26 @@
 import Link from "next/link"
 import React from "react"
-import { Node } from "unist"
-import { ComponentPropsWithNode } from "rehype-react"
+import { Element, Root } from "hast"
 import HTMLRenderer from "../HTMLRenderer/HTMLRenderer"
 
 interface NextLinkProps {
   href?: string
 }
 
-const NextLink = (props: ComponentPropsWithNode) => {
-  const { node } = props
-  const { href } = node?.properties as NextLinkProps
-  const [child] = node?.children as Node[]
+const NextLink = (node: Element) => {
+  const { href } = node.properties as NextLinkProps
+
+  let root: Root = {
+    type: "root",
+    children: node.children,
+  }
 
   return (
     <>
       {!!href && (
         <Link href={href}>
           <a>
-            <HTMLRenderer node={child} />
+            <HTMLRenderer node={root} />
           </a>
         </Link>
       )}

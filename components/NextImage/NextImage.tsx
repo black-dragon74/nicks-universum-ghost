@@ -1,24 +1,33 @@
 import Image from "next/image"
 import { Dimensions } from "@lib/images"
-import { ComponentPropsWithNode } from "rehype-react"
+import { Element } from "hast"
 
-interface NextImageProps {
+interface NextImageProps extends Dimensions {
   src: string
   className?: string[]
 }
 
-const NextImage = (props: ComponentPropsWithNode) => {
-  const { node } = props
+const NextImage = (node: Element) => {
   if (!node) return null
 
-  const imageDimensions = node.imageDimensions as Dimensions
-  const { src, className: classArray } = node.properties as NextImageProps
+  const {
+    src,
+    width,
+    height,
+    className: classArray,
+  } = node.properties as unknown as NextImageProps
   const className = classArray.join(" ")
 
   return (
     <div className="flex root-image">
       <div {...{ className }}>
-        <Image src={src} {...imageDimensions} {...{ className }} />
+        <Image
+          alt="TODO" // TODO: Add alt functionality, it is likely there on the props, extract it
+          src={src}
+          width={width}
+          height={height}
+          {...{ className }}
+        />
       </div>
     </div>
   )

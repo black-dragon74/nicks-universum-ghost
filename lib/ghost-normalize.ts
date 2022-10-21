@@ -1,19 +1,17 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable prefer-reflect */
 import { PostOrPage } from "@tryghost/content-api"
-import Rehype from "rehype"
+import { rehype } from "rehype"
 import { GhostPostOrPage } from "types/GhostPostOrPage"
-import visit from "unist-util-visit"
+import { visit } from "unist-util-visit"
 import { UrlWithStringQuery, parse as urlParse } from "url"
-import { Node, Parent } from "unist"
 import { cloneDeep } from "lodash"
 import ProcessedENV from "./processEnv"
-import refractor from "refractor"
-import nodeToString from "hast-util-to-string"
+import { refractor, RefractorRoot } from "refractor"
+import { toString as nodeToString } from "hast-util-to-string"
 import { Dimensions, getImageDimensions } from "./images"
+import { Root, Element } from "hast"
 
-// eslint-disable-next-line
-const baseProcessor = Rehype().use({
+const baseProcessor = rehype().use({
   settings: {
     fragment: true,
     space: `html`,
@@ -61,13 +59,16 @@ const normalizePost = async (
 // Rewrite absolute links to relative
 const withRewriteGhostLinks =
   (cmsURL: UrlWithStringQuery, basePath = "/") =>
-  (htmlAst: Node) => {
-    visit(htmlAst, { tagName: "a" }, (node: Node) => {
-      const href = urlParse((node?.properties as HTMLAnchorElement).href)
+  (htmlAst: Root) => {
+    visit(htmlAst, { tagName: "a" }, (node: Element) => {
+      const extractedHref = (node.properties as unknown as HTMLAnchorElement)
+        .href
+      const href = urlParse(extractedHref)
+
       if (href.protocol === cmsURL.protocol && href.host === cmsURL.host) {
         const relURL = basePath + href.pathname?.substring(1)
         // eslint-disable-next-line
-        ;(node.properties as HTMLAnchorElement).href = relURL
+        ;(node.properties as unknown as HTMLAnchorElement).href = relURL
       }
     })
 
@@ -75,9 +76,9 @@ const withRewriteGhostLinks =
   }
 
 // Rewrite relative links to be used with next/link
-const withRewriteRelativeLinks = (htmlAst: Node) => {
-  visit(htmlAst, { tagName: "a" }, (node: Node) => {
-    const href = (node?.properties as HTMLAnchorElement).href
+const withRewriteRelativeLinks = (htmlAst: Root) => {
+  visit(htmlAst, { tagName: "a" }, (node: Element) => {
+    const href = (node.properties as unknown as HTMLAnchorElement).href
     if (href && href.startsWith("http")) {
       const copyOfNode = cloneDeep(node)
       delete copyOfNode.properties
@@ -94,16 +95,16 @@ const withRewriteRelativeLinks = (htmlAst: Node) => {
 // Syntax highlighting with Prism.js
 interface NodeProperties {
   className?: string[]
-  style: string | string[]
+  style?: string | string[]
 }
 
-const withSyntaxHighlighting = (htmlAst: Node): Node => {
+const withSyntaxHighlighting = (htmlAst: Root): Root => {
   // If disabled by config, return node as is
   if (!prism.enable) return htmlAst
 
   // Reads the classname prefixed with "language-"
-  const getLanguage = (node: Node) => {
-    const className = (node?.properties as NodeProperties).className || []
+  const getLanguage = (node: Element) => {
+    const className = <string[]>node.properties.className || []
 
     for (const classList of className) {
       if (classList.slice(0, 9) === "language-") {
@@ -114,53 +115,56 @@ const withSyntaxHighlighting = (htmlAst: Node): Node => {
     return null
   }
 
-  visit(
-    htmlAst,
-    "element",
-    (node: Node, index: number, parent: Parent | undefined) => {
-      if (parent.tagName !== "pre" || node.tagName !== "code") {
+  visit(htmlAst, "element", (node: Element, index: number, parent: Element) => {
+    if (parent.tagName !== "pre" || node.tagName !== "code") {
+      return
+    }
+
+    const lang = getLanguage(node)
+    if (lang === null) return
+
+    let className = (node.properties as NodeProperties).className || []
+    let result: RefractorRoot = undefined
+    try {
+      className = className.concat("language-" + lang)
+      result = refractor.highlight(nodeToString(node), lang)
+    } catch (err) {
+      // If error is due to unknown language, return
+      if (/Unknown Language/.test((err as Error).message)) {
+        console.warn(`Unable to highlight unknown langauge: ${lang}`)
         return
       }
 
-      const lang = getLanguage(node)
-      if (lang === null) return
-
-      let className = (node.properties as NodeProperties).className || []
-      let result = undefined
-      try {
-        className = className.concat("language-" + lang)
-        result = refractor.highlight(nodeToString(node), lang)
-      } catch (err) {
-        // If error is due to unknown language, return
-        if (/Unknown Language/.test((err as Error).message)) {
-          console.warn(`Unable to highlight unknown langauge: ${lang}`)
-          return
-        }
-
-        // Else, throw
-        throw new Error(err)
-      }
-      node.children = result as Node[]
+      // Else, throw
+      throw new Error(err)
     }
-  )
+
+    node.children = result.children
+  })
 
   return htmlAst
 }
 
 // Rewrite images to be used with next/image
-const withInlinedImages = async (htmlAst: Node): Promise<Node> => {
-  const nodes: { node: Node; parent: Node | undefined }[] = []
+const withInlinedImages = async (htmlAst: Root): Promise<Root> => {
+  const nodes: {
+    node: Element & { imageDimensions: Promise<Dimensions> | Dimensions }
+    parent: Element | undefined
+  }[] = []
 
   // Visit the nodes
   visit(
     htmlAst,
     { tagName: "img" },
-    (node: Node, index: number, parent: Node | undefined) => {
-      if (images.nextInlineImages) node.tagName = "Image"
+    (node: Element, index: number, parent: Element) => {
+      // if (images.nextInlineImages) node.tagName = "Image"
 
-      const { src } = node.properties as HTMLImageElement
-      node.imageDimensions = getImageDimensions(src)
-      nodes.push({ node, parent })
+      const { src } = node.properties as unknown as HTMLImageElement
+
+      nodes.push({
+        node: { ...node, imageDimensions: getImageDimensions(src) },
+        parent,
+      })
     }
   )
 

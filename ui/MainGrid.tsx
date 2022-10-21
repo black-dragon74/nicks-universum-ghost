@@ -1,11 +1,14 @@
 import { ScreenType, useScreenType } from "@hooks/useScreenType"
-import { FC } from "react"
+import React, { FC, ReactNode } from "react"
 
 interface MainGridProps {
   className?: string
 }
 
-const MainGrid: FC<MainGridProps> = ({ className = "", children }) => {
+const MainGrid: FC<React.PropsWithChildren<MainGridProps>> = ({
+  className = "",
+  children,
+}) => {
   const screenType = useScreenType()
   let gridStyle = ""
   let colGap = ""

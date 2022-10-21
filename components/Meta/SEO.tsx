@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { resolve } from "url"
 import Head from "next/head"
 import { GhostSettings } from "@lib/ghost"

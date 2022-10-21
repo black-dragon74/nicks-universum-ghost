@@ -1,5 +1,5 @@
 import { ScreenType, useScreenType } from "@hooks/useScreenType"
-import { FC, ReactNode } from "react"
+import React, { FC, ReactNode } from "react"
 import MainGrid from "ui/MainGrid"
 
 interface MainLayoutProps {
@@ -8,7 +8,7 @@ interface MainLayoutProps {
   mobileHeader?: ReactNode
 }
 
-const MainLayout: FC<MainLayoutProps> = ({
+const MainLayout: FC<React.PropsWithChildren<MainLayoutProps>> = ({
   leftPanel = <div />,
   rightPanel = <div />,
   mobileHeader = <div />,
