@@ -45,3 +45,8 @@ yarn-error.log*
 
 # Temp Files
 pages/test.tsx
+
+# Next sitemaps
+public/robots.txt
+public/sitemap-0.xml
+public/sitemap.xml

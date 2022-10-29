@@ -5,6 +5,7 @@ import DarkModeIcon from "@icons/DarkModeIcon"
 import GitHubIcon from "@icons/GitHubIcon"
 import InstaIcon from "@icons/InstaIcon"
 import toggleDarkMode from "@lib/toggleDarkMode"
+import Link from "next/link"
 import { FC, PropsWithChildren } from "react"
 
 const InstaIconWithLink = withLinkToURL(InstaIcon)
@@ -13,7 +14,7 @@ const GitHubIconWithLink = withLinkToURL(GitHubIcon)
 interface NavMenuProps extends PropsWithChildren {}
 
 const NavMenu: FC<NavMenuProps> = () => {
-  const [postTitle, togglePostTitle] = useToggle()
+  const [postTitle, _] = useToggle()
   return (
     <header className="sticky top-0 z-50 dark:text-gray-300 text-black">
       <div
@@ -23,17 +24,19 @@ const NavMenu: FC<NavMenuProps> = () => {
         <div data-inner-div id="nav-flex-wrapper" className="container p-2">
           <div className="flex  items-center justify-start overflow-scroll">
             {/* Logo start */}
-            <div
-              data-logo-part
-              onClick={togglePostTitle}
-              className="flex items-center mr-8 shrink-0 hover:text-gray-400 ease-in-out transition-colors duration-300 cursor-pointer"
-            >
-              <BulbIcon className="w-8 h-8 mr-2" />
-              <div className="flex flex-col gap-0">
-                <p>Nick&apos;s Universum</p>
-                <small>Veni. Vidi. Vici.</small>
+            <Link href="/">
+              <div
+                data-logo-part
+                // onClick={togglePostTitle}
+                className="flex items-center mr-8 shrink-0 hover:text-gray-400 ease-in-out transition-colors duration-300 cursor-pointer"
+              >
+                <BulbIcon className="w-8 h-8 mr-2" />
+                <div className="flex flex-col gap-0">
+                  <p>Nick&apos;s Universum</p>
+                  <small>Veni. Vidi. Vici.</small>
+                </div>
               </div>
-            </div>
+            </Link>
             {/* Logo end */}
 
             {/* Nav Menu Start */}
@@ -50,30 +53,19 @@ const NavMenu: FC<NavMenuProps> = () => {
                   postTitle && "-translate-y-12"
                 }`}
               >
-                <a
-                  href="#"
-                  className="hover:text-gray-400 ease-in-out transition-colors duration-300"
+                <Link href="/">
+                  <a className="hover:text-gray-400 ease-in-out transition-colors duration-300">
+                    Home
+                  </a>
+                </Link>
+                <Link
+                  href={`https://portfolio.nicksuniversum.com`}
+                  target="_blank"
                 >
-                  Home
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-gray-400 ease-in-out transition-colors duration-300"
-                >
-                  About
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-gray-400 ease-in-out transition-colors duration-300"
-                >
-                  Contact
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-gray-400 ease-in-out transition-colors duration-300"
-                >
-                  Portfolio
-                </a>
+                  <a className="hover:text-gray-400 ease-in-out transition-colors duration-300">
+                    Portfolio
+                  </a>
+                </Link>
                 <div className="w-24 md:hidden" />
               </nav>
             </div>

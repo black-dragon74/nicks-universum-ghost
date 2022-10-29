@@ -1,4 +1,5 @@
-import { getAllPostsSlugs, getPostBySlug } from "@api"
+import { getAllPostsSlugs, getAllSettings, getPostBySlug } from "@api"
+import { SEOImage } from "@components/Meta/SEOImage"
 import HomePage from "@modules/HomePage"
 import { GhostPostOrPage } from "types/GhostPostOrPage"
 
@@ -13,9 +14,14 @@ export const getStaticProps = async () => {
     })
   )
 
+  const settings = await getAllSettings()
+  const seoImage = await SEOImage({ siteUrl: settings.processEnv.siteURL })
+
   return {
     props: {
       posts: posts as GhostPostOrPage[],
+      settings,
+      seoImage,
     },
   }
 }

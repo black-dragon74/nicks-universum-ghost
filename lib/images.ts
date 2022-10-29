@@ -30,10 +30,10 @@ const getImageDimensions = async (
   if (skipCache) return null
   if (!url) return null
 
-  const cacheKey = await getCacheKey(url, skipCache)
   const alreadyCached = getCache<Dimensions>(url)
   if (alreadyCached) return alreadyCached
 
+  const cacheKey = await getCacheKey(url, skipCache)
   let width = 0
   let height = 0
 
@@ -64,6 +64,7 @@ const getImageDimensions = async (
 
       if (!["ECONRESET", "ECONTENT"].includes(code)) {
         console.warn(`Error while probing image at url ${url}`)
+        // return null
         throw new Error(error)
       }
     }

@@ -28,5 +28,5 @@ export const numMaxPostsOnHomePage = 5
 export const enableISR = true
 export const numMaxISRPosts = 10
 export const numMaxISRPages = 10
-export const revalidateInterval = 10 // seconds
-export const fallbackType = true
+export const revalidateInterval = 300 // seconds
+export const fallbackType = "blocking"

@@ -1,22 +1,23 @@
-import Head from "next/head"
-
 import Footer from "@ui/Footer"
 import PostCard from "@ui/PostCard"
 import { GhostPostOrPage } from "types/GhostPostOrPage"
 import { FC } from "react"
 import NavMenu from "@ui/NavMenu"
 import HeroHeader from "@ui/HeroHeader"
+import { GhostSettings } from "@lib/ghost"
+import { ISEOImage } from "@components/Meta/SEOImage"
+import { SEO } from "@components/Meta/SEO"
 
 interface HomePageProps {
   posts: GhostPostOrPage[]
+  settings: GhostSettings
+  seoImage: ISEOImage
 }
 
-const HomePage: FC<HomePageProps> = ({ posts }) => {
+const HomePage: FC<HomePageProps> = ({ posts, settings, seoImage }) => {
   return (
     <>
-      <Head>
-        <title>Nick&apos;s Universum - Beta</title>
-      </Head>
+      <SEO {...{ settings, seoImage }} />
       <div className="bg-white dark:bg-muidark">
         <NavMenu />
         <HeroHeader />
