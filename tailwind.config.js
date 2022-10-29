@@ -3,12 +3,24 @@ module.exports = {
   content: [
     "./components/**/*.tsx",
     "./public/index.html",
-    "./pages/**/*.tsx",
-    "./pages/*.tsx",
-    "./ui/*.tsx",
+    "./pages/**/*.{js,jsx,ts,tsx}",
+    "./icons/**/*.{js,jsx,ts,tsx}",
+    "./modules/**/*.{js,jsx,ts,tsx}",
+    "./ui/**/*.{js,jsx,ts,tsx}",
   ],
-  darkMode: "media",
+  mode: "jit",
+  darkMode: "class",
   theme: {
+    container: {
+      center: true,
+      screens: {
+        sm: "600px",
+        md: "728px",
+        lg: "984px",
+        xl: "1240px",
+        "2xl": "1240px",
+      },
+    },
     fontFamily: {
       sans: [
         "Inter",
@@ -60,6 +72,7 @@ module.exports = {
           disabled: "var(--color-accent-disabled)",
         },
         black: "#000",
+        muidark: "#303030",
       },
     },
   },

@@ -1,4 +1,4 @@
-import { Component, ComponentType, createRef, RefObject } from "react"
+import { Component, ComponentType, RefObject, createRef } from "react"
 
 // this file exists just for my personal reference
 // this is a HOC impl of ActiveOnHover which is render prop based

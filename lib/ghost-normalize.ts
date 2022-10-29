@@ -6,10 +6,11 @@ import { visit } from "unist-util-visit"
 import { UrlWithStringQuery, parse as urlParse } from "url"
 import { cloneDeep } from "lodash"
 import ProcessedENV from "./processEnv"
-import { refractor, RefractorRoot } from "refractor"
+import { RefractorRoot, refractor } from "refractor"
 import { toString as nodeToString } from "hast-util-to-string"
 import { Dimensions, getImageDimensions } from "./images"
-import { Root, Element } from "hast"
+import { Element, Root } from "hast"
+import { readingTime } from "@tryghost/helpers"
 
 const baseProcessor = rehype().use({
   settings: {
@@ -49,10 +50,16 @@ const normalizePost = async (
   const url = post.feature_image
   const dimensions = await getImageDimensions(url)
 
+  const timeToRead = readingTime(post, {
+    minute: "1 min read",
+    minutes: "% min read",
+  })
+
   return {
     ...post,
     htmlAst,
     featureImage: (url && dimensions && { url, dimensions }) || null,
+    timeToRead,
   }
 }
 

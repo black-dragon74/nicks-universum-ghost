@@ -1,4 +1,4 @@
-import { Component, createRef, RefObject } from "react"
+import { Component, RefObject, createRef } from "react"
 
 interface ActiveOnHoverProps {
   activeClass: string

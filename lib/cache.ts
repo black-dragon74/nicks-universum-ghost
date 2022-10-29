@@ -1,8 +1,9 @@
 /* eslint-disable no-sync */
 import fs from "fs"
 import path from "path"
+import ProcessedENV from "./processEnv"
 
-const enableCaching = process.env.ENABLE_DATA_CACHING === "true" || false
+const enableCaching = ProcessedENV.cache.enable || false
 const cacheRoot = path.join(process.cwd(), ".next-cache")
 
 const mkdir = (pth: string): boolean => {

@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   redirects() {
     return [
       {
@@ -8,8 +9,16 @@ module.exports = {
       },
     ]
   },
+  swcMinify: true,
   images: {
-    domains: ["static.ghost.org", "opensubscriptionplatforms.com", "localhost"],
+    domains: [
+      "static.ghost.org",
+      "opensubscriptionplatforms.com",
+      "localhost",
+      "images.unsplash.com",
+    ],
   },
   reactStrictMode: true,
 }
+
+module.exports = nextConfig

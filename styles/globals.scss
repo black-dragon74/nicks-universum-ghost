@@ -1,44 +1,43 @@
+// Inject TW
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-// Global Vars
-:root {
-  --color-button-text: #fff;
-  --color-primary: #f0e5e5;
-  --color-primary-100: #dee3ea;
-  --color-primary-200: #b2bdcd;
-  --color-primary-300: #5d7290;
-  --color-primary-600: #323d4d;
-  --color-primary-700: #242c37;
-  --color-primary-800: #151a21;
-  --color-primary-900: #0b0e11;
-  --color-secondary-washed-out: #879eed;
-  --color-secondary: #5575e7;
-  --color-accent-glow: rgba(253, 77, 77, 0.3);
-  --color-accent: #fd4d4d;
-  --color-accent-hover: #fd6868;
-  --color-accent-disabled: #f5bfbf;
-  --screen-height-reduction: 0px;
-  --color-primary-100-translucent: rgba(222, 227, 234, 0.15);
-
-  --inner-max-width: 1040px;
+* {
+  @apply m-0 p-0 box-border;
 }
 
-// Basic settings
-html,
-body,
-#__next {
-  background-color: var(--color-primary-900);
-  height: 100%;
-  width: 100%;
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-// Global Classes
-.inner {
-  margin: 0 auto;
-  width: 100%;
-  max-width: var(--inner-max-width);
+div#nav-flex-wrapper {
+  &::after {
+    display: block;
+    pointer-events: none;
+    content: "";
+    height: 100%;
+    width: 90px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: linear-gradient(90deg, rgba(10, 11, 12, 0) 0, #0a0b0c);
+
+    @media (screen and min-width: 728px) {
+      & {
+        display: none;
+      }
+    }
+  }
+}
+
+html:not(.dark) {
+  div#nav-flex-wrapper::after {
+    display: none;
+  }
 }
 
 /**
