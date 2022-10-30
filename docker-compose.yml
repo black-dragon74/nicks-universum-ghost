@@ -3,14 +3,10 @@ version: "3.7"
 services:
   nextjs:
     container_name: nicks_universum_nextjs
-    build: .
+    build:
+      context: .
+      network: host
     restart: always
-    networks:
-      - hostnet
     ports:
       - "2369:3000"
 
-networks:
-  hostnet:
-    external: true
-    name: host
