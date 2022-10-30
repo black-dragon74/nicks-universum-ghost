@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  nextjs:
+    container_name: nicks_universum_nextjs
+    build: .
+    restart: always
+    ports:
+      - "2369:3000"

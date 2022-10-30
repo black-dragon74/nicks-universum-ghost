@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   redirects() {
     return [
       {
@@ -16,7 +17,6 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "ghostapi.nicksuniversum.com",
-        port: "",
         pathname: "/content/images/*",
       },
     ],
