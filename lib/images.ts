@@ -64,8 +64,8 @@ const getImageDimensions = async (
 
       if (!["ECONRESET", "ECONTENT"].includes(code)) {
         console.warn(`Error while probing image at url ${url}`)
-        // return null
-        throw new Error(error)
+        return null
+        // throw new Error(error)
       }
     }
   } while (hasError && numRetries < numMaxRetries)

@@ -11,11 +11,14 @@ const nextConfig = {
   },
   swcMinify: true,
   images: {
-    domains: [
-      "static.ghost.org",
-      "opensubscriptionplatforms.com",
-      "localhost",
-      "images.unsplash.com",
+    domains: ["ghostapi.nicksuniversum.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ghostapi.nicksuniversum.com",
+        port: "",
+        pathname: "/content/images/*",
+      },
     ],
   },
   reactStrictMode: true,
