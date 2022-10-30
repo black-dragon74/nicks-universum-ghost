@@ -39,9 +39,15 @@ const ProcessedENV: ProcessEnvProps = {
     enable: processEnvBool(process.env.ENABLE_CACHING, appConfig.enableCaching),
   },
   isr: {
-    enable: appConfig.enableISR,
-    numMaxISRPages: appConfig.numMaxISRPages,
-    numMaxISRPosts: appConfig.numMaxISRPosts,
+    enable: processEnvBool(process.env.ENABLE_ISR, appConfig.enableISR),
+    numMaxISRPages: processEnvNumber(
+      process.env.MAX_ISR_PAGES,
+      appConfig.numMaxISRPages
+    ),
+    numMaxISRPosts: processEnvNumber(
+      process.env.MAX_ISR_POSTS,
+      appConfig.numMaxISRPosts
+    ),
     revalidateInterval: appConfig.revalidateInterval,
     fallbackType: appConfig.fallbackType,
   },

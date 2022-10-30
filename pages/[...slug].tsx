@@ -136,7 +136,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllPostsSlugs()
+  let paths = await getAllPostsSlugs()
+
+  if (ProcessedENV.isr.enable) {
+    console.log(
+      `\nISR is enabled for dynamic routes. Only ${ProcessedENV.isr.numMaxISRPosts} pages will be rendered for route [...slug]. `
+    )
+    paths = paths.slice(0, ProcessedENV.isr.numMaxISRPosts)
+  } else {
+    console.log(`\nISR is disabled. Page generation might take a while...`)
+  }
 
   return {
     paths: paths.map(path => "/" + path),
