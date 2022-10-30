@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/env": "^13.0.0",
     "crypto-hash": "^2.0.1",
     "hast-util-to-string": "^2.0.0",
     "lodash": "^4.17.21",
@@ -34,7 +35,6 @@
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.7",
     "@tryghost/content-api": "^1.11.4",
-    "@tryghost/helpers": "^1.1.74",
     "@types/lodash": "^4.14.186",
     "@types/node": "^18.11.3",
     "@types/react": "^18.0.21",

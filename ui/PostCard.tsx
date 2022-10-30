@@ -15,7 +15,6 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
     feature_image,
     excerpt,
     published_at,
-    timeToRead,
     primary_author,
     slug,
   } = post
@@ -77,7 +76,8 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
             {primary_author.name || "Author"}
           </p>
           <small className="uppercase text-gray-500 dark:text-gray-300">
-            {getDateFromDateString(published_at) || "Today"} • {timeToRead}
+            {getDateFromDateString(published_at) || "Today"} •{" "}
+            {`${post.reading_time || 1} min read`}
           </small>
         </div>
       </footer>

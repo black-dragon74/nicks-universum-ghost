@@ -26,7 +26,6 @@ const ViewMyPage: FC<PostPageProps> = ({ post, settings, seoImage }) => {
     excerpt,
     primary_author,
     published_at,
-    timeToRead,
     meta_description,
   } = post
 
@@ -68,7 +67,7 @@ const ViewMyPage: FC<PostPageProps> = ({ post, settings, seoImage }) => {
                   </p>
                   <small className="uppercase text-sm text-gray-500 dark:text-gray-300">
                     {getDateFromDateString(published_at) || "Today"} •{" "}
-                    {timeToRead}
+                    {`${post.reading_time || 1} min read`}
                   </small>
                 </div>
               </div>

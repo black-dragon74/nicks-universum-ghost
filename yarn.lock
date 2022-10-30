@@ -68,6 +68,11 @@
   resolved "https://registry.yarnpkg.com/@next/env/-/env-12.3.1.tgz#18266bd92de3b4aa4037b1927aa59e6f11879260"
   integrity sha512-9P9THmRFVKGKt9DYqeC2aKIxm8rlvkK38V1P1sRE7qyoPBIs8l9oo79QoSdPtOWfzkbDAVUqvbQGgTMsb8BtJg==
 
+"@next/env@^13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@next/env/-/env-13.0.0.tgz#38527956680693c90b4522ab4ab9a2fbe3a17f67"
+  integrity sha512-65v9BVuah2Mplohm4+efsKEnoEuhmlGm8B2w6vD1geeEP2wXtlSJCvR/cCRJ3fD8wzCQBV41VcMBQeYET6MRkg==
+
 "@next/eslint-plugin-next@12.3.1", "@next/eslint-plugin-next@^12.3.1":
   version "12.3.1"
   resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-12.3.1.tgz#b821f27b0f175954d8d18e5d323fce040ecc79a6"
@@ -199,13 +204,6 @@
   integrity sha512-1ShIj8i37rR/9gaenRiaGvPNAU3jAuvViD64mmVxE1cedXJjpqbaOLM8lFWaVuGUafDQrfo5tv57FN6ac51QeQ==
   dependencies:
     axios "^0.27.0"
-
-"@tryghost/helpers@^1.1.74":
-  version "1.1.74"
-  resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-1.1.74.tgz#1910bad5bdb29c9d17c4917b6761dc74e0d0c10a"
-  integrity sha512-fD3gdDgKKSvnX5j/1HLvZdwXAfWfDFHz6YpHQSWvarwnNeok1BfdDoi0qhRd+3VM0o4QJK13XqQtPPo3hSv//g==
-  dependencies:
-    lodash-es "^4.17.11"
 
 "@types/hast@^2.0.0":
   version "2.3.4"
@@ -1848,11 +1846,6 @@ locate-path@^6.0.0:
   integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
   dependencies:
     p-locate "^5.0.0"
-
-lodash-es@^4.17.11:
-  version "4.17.21"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
-  integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
 
 lodash.castarray@^4.4.0:
   version "4.4.0"

@@ -7,5 +7,4 @@ export type GhostPostOrPage = PostOrPage & {
   featureImage?: NextImage | null
   htmlAst?: Root | null
   toc?: ToC[] | null
-  timeToRead?: string | null
 }
