@@ -67,9 +67,8 @@ const ViewMyPage: FC<PostPageProps> = ({ post, settings, seoImage }) => {
                     {primary_author.name || "Author"}
                   </p>
                   <small className="uppercase text-sm text-gray-500 dark:text-gray-300">
-                    {getDateFromDateString(published_at) ||
-                      "Today"}{" "}
-                    • {timeToRead}
+                    {getDateFromDateString(published_at) || "Today"} •{" "}
+                    {timeToRead}
                   </small>
                 </div>
               </div>

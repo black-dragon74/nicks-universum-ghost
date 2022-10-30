@@ -2,6 +2,7 @@ import { FC } from "react"
 import Image from "next/image"
 import { GhostPostOrPage } from "types/GhostPostOrPage"
 import Link from "next/link"
+import getDateFromDateString from "@lib/getDateFromDateString"
 
 interface PostCardProps {
   post: GhostPostOrPage
@@ -76,8 +77,7 @@ const PostCard: FC<PostCardProps> = ({ post }) => {
             {primary_author.name || "Author"}
           </p>
           <small className="uppercase text-gray-500 dark:text-gray-300">
-            {new Date(published_at).toLocaleDateString("en-IN") || "Today"} •{" "}
-            {timeToRead}
+            {getDateFromDateString(published_at) || "Today"} • {timeToRead}
           </small>
         </div>
       </footer>
