@@ -1,5 +1,5 @@
 const sitemapCfg = {
-  siteUrl: process.env.SITE_URL || undefined,
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || undefined,
   generateRobotsTxt: true, // (optional)
 }
 
