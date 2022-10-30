@@ -109,6 +109,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params
 
   const post = await getPostBySlug(slug as string)
+
+  if (!post) {
+    return {
+      notFound: true,
+    }
+  }
+
   const settings = await getAllSettings()
 
   const siteUrl = ProcessedENV.siteURL
