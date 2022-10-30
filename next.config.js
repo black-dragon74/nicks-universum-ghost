@@ -12,7 +12,11 @@ const nextConfig = {
   },
   swcMinify: true,
   images: {
-    domains: ["ghostapi.nicksuniversum.com"],
+    domains: [
+      "ghostapi.nicksuniversum.com",
+      "beta.nicksuniversum.com",
+      "nicksuniversum.com",
+    ],
     remotePatterns: [
       {
         protocol: "https",
