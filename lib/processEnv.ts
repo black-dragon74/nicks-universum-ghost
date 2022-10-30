@@ -14,7 +14,7 @@ const processEnvNumber = (val: string | undefined, defValue: number) => {
 }
 
 const ProcessedENV: ProcessEnvProps = {
-  siteURL: process.env.SITE_URL || appConfig.siteURL,
+  siteURL: process.env.NEXT_PUBLIC_SITE_URL || appConfig.siteURL,
   home: {
     numMaxPostsOnHomePage: processEnvNumber(
       process.env.POSTS_PER_PAGE,
@@ -23,8 +23,8 @@ const ProcessedENV: ProcessEnvProps = {
   },
   prism: { enable: appConfig.usePrism },
   ghost: {
-    apiKey: process.env.API_KEY || appConfig.ghostAPIKey,
-    apiURL: process.env.API_URL || appConfig.ghostAPIURL,
+    apiKey: process.env.NEXT_PUBLIC_API_KEY || appConfig.ghostAPIKey,
+    apiURL: process.env.NEXT_PUBLIC_API_URL || appConfig.ghostAPIURL,
   },
   images: {
     nextFeatureImages: appConfig.nextFeatureImages,
