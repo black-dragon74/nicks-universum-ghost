@@ -3,11 +3,11 @@
 //
 
 // Site config
-export const siteURL = "http://localhost:3000"
+export const siteURL = ""
 
 // Ghost API config
-export const ghostAPIKey = "599a17d5e19a93f43d630b259d"
-export const ghostAPIURL = "http://localhost:2368"
+export const ghostAPIKey = ""
+export const ghostAPIURL = ""
 
 // Cache control
 export const enableCaching = true
