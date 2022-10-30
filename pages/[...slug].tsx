@@ -11,6 +11,7 @@ import { GhostSettings } from "@lib/ghost"
 import { ISEOImage, SEOImage } from "@components/Meta/SEOImage"
 import { useRouter } from "next/router"
 import { SEO } from "@components/Meta/SEO"
+import getDateFromDateString from "@lib/getDateFromDateString"
 
 interface PostPageProps {
   post: GhostPostOrPage
@@ -66,7 +67,7 @@ const ViewMyPage: FC<PostPageProps> = ({ post, settings, seoImage }) => {
                     {primary_author.name || "Author"}
                   </p>
                   <small className="uppercase text-sm text-gray-500 dark:text-gray-300">
-                    {new Date(published_at).toLocaleDateString("en-IN") ||
+                    {getDateFromDateString(published_at) ||
                       "Today"}{" "}
                     • {timeToRead}
                   </small>
