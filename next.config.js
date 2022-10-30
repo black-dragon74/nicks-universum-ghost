@@ -16,6 +16,7 @@ const nextConfig = {
       "ghostapi.nicksuniversum.com",
       "beta.nicksuniversum.com",
       "nicksuniversum.com",
+      "localhost",
     ],
     remotePatterns: [
       {
