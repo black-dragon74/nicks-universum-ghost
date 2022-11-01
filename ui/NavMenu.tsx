@@ -1,3 +1,4 @@
+import SearchBarModal from "@components/SearchBarModal"
 import withLinkToURL from "@components/withLinkToURL"
 import useToggle from "@hooks/useToggle"
 import BulbIcon from "@icons/BulbIcon"
@@ -6,7 +7,7 @@ import GitHubIcon from "@icons/GitHubIcon"
 import InstaIcon from "@icons/InstaIcon"
 import toggleDarkMode from "@lib/toggleDarkMode"
 import Link from "next/link"
-import { FC, PropsWithChildren } from "react"
+import { FC, PropsWithChildren, useState } from "react"
 
 const InstaIconWithLink = withLinkToURL(InstaIcon)
 const GitHubIconWithLink = withLinkToURL(GitHubIcon)
@@ -15,6 +16,8 @@ interface NavMenuProps extends PropsWithChildren {}
 
 const NavMenu: FC<NavMenuProps> = () => {
   const [postTitle, _] = useToggle()
+  const [search, setSearch] = useState<boolean>(false)
+
   return (
     <header className="sticky top-0 z-50 dark:text-gray-300 text-black">
       <div
@@ -58,14 +61,20 @@ const NavMenu: FC<NavMenuProps> = () => {
                     Home
                   </a>
                 </Link>
-                <Link
-                  href={`https://portfolio.nicksuniversum.com`}
-                  target="_blank"
-                >
-                  <a className="hover:text-gray-400 ease-in-out transition-colors duration-300">
+                <Link href={`https://portfolio.nicksuniversum.com`}>
+                  <a
+                    className="hover:text-gray-400 ease-in-out transition-colors duration-300"
+                    target="_blank"
+                  >
                     Portfolio
                   </a>
                 </Link>
+                <a
+                  className="hover:text-gray-400 ease-in-out transition-colors duration-300 cursor-pointer"
+                  onClick={() => setSearch(true)}
+                >
+                  Search
+                </a>
                 <div className="w-24 md:hidden" />
               </nav>
             </div>
@@ -73,8 +82,16 @@ const NavMenu: FC<NavMenuProps> = () => {
 
             {/* Start - Desktop Social Menu */}
             <div className="hidden md:flex items-center gap-8 ml-auto">
-              <InstaIconWithLink className="w-6 h-6" href="/" />
-              <GitHubIconWithLink className="w-6 h-6" href="/" />
+              <InstaIconWithLink
+                className="w-6 h-6"
+                href="https://instagram.com/50shadesofnickk"
+                target="_blank"
+              />
+              <GitHubIconWithLink
+                className="w-6 h-6"
+                href="https://github.com/black-dragon74"
+                target="_blank"
+              />
               <DarkModeIcon
                 className={`w-6 h-6 cursor-pointer hover:text-gray-400 ease-in-out transition-all duration-300 hover:rotate-180`}
                 onClick={toggleDarkMode}
@@ -84,6 +101,7 @@ const NavMenu: FC<NavMenuProps> = () => {
           </div>
         </div>
       </div>
+      <SearchBarModal isOpen={search} onRequestClose={() => setSearch(false)} />
     </header>
   )
 }

@@ -40,6 +40,14 @@ html:not(.dark) {
   }
 }
 
+:root {
+  --color-modal-ui: white;
+}
+
+html.dark {
+  --color-modal-ui: #303030;
+}
+
 /**
 * Syntax highlighter shiz
 */

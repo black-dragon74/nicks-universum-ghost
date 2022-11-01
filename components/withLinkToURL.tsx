@@ -1,9 +1,11 @@
 import Link from "next/link"
+import { HTMLAttributeAnchorTarget } from "react"
 
 // HOC that adds an a tag with URL to the component
 interface WithLinkToURLProps {
   href: string
   as?: string
+  target?: HTMLAttributeAnchorTarget
   passHref?: boolean
   className?: string
 }
@@ -24,6 +26,7 @@ const withLinkToURL = <P extends WithLinkToURLProps>(
           className={`hover:text-gray-400 ease-in-out transition-colors duration-300 ${
             className ?? ""
           }`}
+          target={props?.target}
         >
           <Component {...(props as P)} />
         </a>
