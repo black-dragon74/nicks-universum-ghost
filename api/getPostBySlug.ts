@@ -13,7 +13,7 @@ const getPostBySlug = async (
   try {
     const post = await GhostAPI.posts.read({
       ...PostAndPageFetchOptions,
-      slug,
+      slug: slug as string,
     })
     // older Ghost versions do not throw error on 404
     if (!post) return null
