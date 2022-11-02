@@ -7,7 +7,7 @@ import { parse as urlParse } from "url"
 const getPostBySlug = async (
   slug: string | string[]
 ): Promise<GhostPostOrPage | null> => {
-  if (slug instanceof Array) return null
+  if (slug instanceof Array && slug.length > 1) return null
 
   let result: GhostPostOrPage = undefined
   try {
