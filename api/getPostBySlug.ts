@@ -4,7 +4,11 @@ import { GhostPostOrPage } from "types/GhostPostOrPage"
 import { GhostAPI, PostAndPageFetchOptions } from "./config"
 import { parse as urlParse } from "url"
 
-const getPostBySlug = async (slug: string): Promise<GhostPostOrPage | null> => {
+const getPostBySlug = async (
+  slug: string | string[]
+): Promise<GhostPostOrPage | null> => {
+  if (slug instanceof Array) return null
+
   let result: GhostPostOrPage = undefined
   try {
     const post = await GhostAPI.posts.read({
