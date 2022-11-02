@@ -10,6 +10,4 @@ const getPostsViaFetch = async () => {
   return posts
 }
 
-getPostsViaFetch()
-
 export default getPostsViaFetch
