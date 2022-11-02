@@ -3,9 +3,30 @@ const nextConfig = {
   output: "standalone",
   redirects() {
     return [
+      // This is there so that old SEO links still work
       {
-        source: "/page/1", // Should be the index page
-        destination: "/",
+        source: "/2016/:slug",
+        destination: "/:slug",
+        permanent: true,
+      },
+      {
+        source: "/2017/:slug",
+        destination: "/:slug",
+        permanent: true,
+      },
+      {
+        source: "/2018/:slug",
+        destination: "/:slug",
+        permanent: true,
+      },
+      {
+        source: "/2019/:slug",
+        destination: "/:slug",
+        permanent: true,
+      },
+      {
+        source: "/2020/:slug",
+        destination: "/:slug",
         permanent: true,
       },
     ]
