@@ -1,7 +1,7 @@
 import Modal, { ModalProps } from "@ui/Modal"
 import SearchCardRow from "@ui/SearchCardRow"
 import { SearchContext } from "contexts/SearchContext"
-import { FC, useContext, useDeferredValue, useState } from "react"
+import { FC, useContext, useDeferredValue, useMemo, useState } from "react"
 
 interface SearchBarModalProps extends ModalProps {}
 
@@ -11,13 +11,13 @@ const SearchBarModal: FC<SearchBarModalProps> = ({ isOpen, ...props }) => {
 
   const a = useContext(SearchContext)
 
-  const filteredPosts = (() => {
+  const filteredPosts = useMemo(() => {
     if (deferredPostName === "") return []
 
     return a.filter(p =>
       p.title.toLowerCase().includes(deferredPostName.toLowerCase())
     )
-  })()
+  }, [a, deferredPostName])
 
   return (
     <Modal isOpen={isOpen} onRequestClose={props?.onRequestClose}>
