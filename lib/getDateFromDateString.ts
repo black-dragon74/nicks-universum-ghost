@@ -1,12 +1,10 @@
 const getDateFromDateString = (dateString: string): string => {
-  return new Date(dateString)
-    .toUTCString()
-    .split(" ")
-    .slice(0, 4)
-    .join(" ")
-    .split(" ")
-    .slice(1, 4)
-    .join("-")
+  return new Date(dateString).toLocaleDateString("en-IN", {
+    timeZone: "UTC",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  })
 }
 
 export default getDateFromDateString
